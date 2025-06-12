@@ -1,8 +1,6 @@
 function createDefaultProject(Project) {
     let project1 = new Project('Default Project 1');
-    let project2 = new Project('Default Project 2');
-
-    projectArray.arr = [project1, project2];
+    projectArray.arr = [project1];
 }
 
 function createNewProject(Project, name) {
@@ -13,8 +11,8 @@ function addNewProjectToArray(project, projectArray) {
     projectArray.arr.push(project);
 }
 
-function createNewTodo(Todo, title, description, dueDate, priority, notes) {
-    return new Todo(title, description, dueDate, priority, notes);
+function createNewTodo(Todo, title, description, dueDate, priority, notes, checkmark, status) {
+    return new Todo(title, description, dueDate, priority, notes, checkmark, status);
 }
 
 function addNewTodoToProject(projectName, projectArray, todo) {
@@ -54,5 +52,14 @@ function deleteTodoFromProject(todo, project) {
         project.todoList.splice(project.todoList.indexOf(todo), 1);
     }
 }
+
+function editTodo(todo, title, description, dueDate, priority, notes) {
+    todo.title = title;
+    todo.description = description;
+    todo.dueDate = dueDate;
+    todo.priority = priority;
+    todo.notes = notes;
+} 
+
 
 export * from "todo-logic";
