@@ -33,6 +33,18 @@ function changeTodoCheckMark(todo, checkmark) {
     todo.checkmark = checkmark;
 }
 
+function setTodoDefaultStatus(todo) {
+    todo.status = 'Incomplete';
+}
+
+function changeTodoStatus(todo, status) {
+    if (todo.status === 'Incomplete') {
+        todo.status = 'Completed';
+    } else {
+        todo.status = 'Incomplete';
+    }
+}
+
 function deleteProject(project, projectArray) {
     projectArray.arr.splice(projectArray.arr.indexOf(project), 1);
 }
