@@ -1,0 +1,162 @@
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+
+  width: 100vw;
+  height: 100vh;
+}
+
+/* 6. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 7. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/*
+  10. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
+/* PROJECT */
+body {
+  padding: 40px;
+  display: flex;
+}
+
+.left-column, .right-column {
+  padding: 25px;
+  border-radius: 5px;
+}
+
+.left-column {
+  flex: 0.4;
+  background-color: rgb(232, 83, 83);
+  display: flex;
+  flex-direction: column;
+}
+
+.left-column > h2 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.left-column > button {
+  margin-top: auto;
+}
+
+.right-column {
+  flex: 1;
+  background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  gap: 20px
+}
+
+.project-container > div {
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+}
+
+.todo-container {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  justify-content: center;
+}
+
+.todo {
+  display: flex;
+  background: rgb(255, 255, 193);
+  gap: 10px;
+  padding: 10px;
+  padding-left: 22px;
+  padding-right: 22px;
+  border-radius: 7px;
+  border-left: 7px solid rgb(147, 147, 3);
+  outline: 1px solid gray;
+}
+
+.todo-container> h2 {
+  border-bottom: 1px solid gray;
+  margin-bottom: 6px;
+}
+
+.todo > .checkbox {
+  font-size: 25px;
+  transform: scale(1.5);
+}
+
+.todo > .button-div {
+  margin-left: auto;
+  place-content: center;
+}
+
+.detail-container {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  background:white;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.detail-container > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.detail-container > h2 {
+  border-bottom: 1px solid gray;
+}

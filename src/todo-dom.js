@@ -26,7 +26,7 @@ function createDomTodo(todo, project) {
     let todoContainer = document.querySelector('.todo-container');
     
     let todoDiv = document.createElement('div');
-    let checkbox = document.createElement('button');
+    let checkbox = document.createElement('input');
     let infoDiv = document.createElement('div');
     let title = document.createElement('h4');
     let dueDate = document.createElement('p');
@@ -170,4 +170,4 @@ function saveTodo(todo) {
     todo.notes = notes.value;
 }
 
-export * from 'todo-dom';
+export * from './todo-dom';

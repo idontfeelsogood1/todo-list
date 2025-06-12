@@ -62,4 +62,4 @@ function editTodo(todo, title, description, dueDate, priority, notes) {
 } 
 
 
-export * from "todo-logic";
+export * from "./todo-logic";
