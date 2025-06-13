@@ -81,6 +81,7 @@ body {
   margin-bottom: 10px;
   text-align: center;
   color: rgb(221, 217, 217);
+  padding-bottom: 10px;
 }
 
 .left-column > button {
@@ -93,6 +94,19 @@ body {
   display: flex;
   flex-direction: column;
   gap: 20px
+}
+
+.header > h1 {
+  color: rgb(237, 237, 49);
+}
+
+.add-todo {
+  background: lightgray;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  height: 40px;
 }
 
 .project-container {
@@ -134,6 +148,7 @@ body {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid gray;
+  padding-bottom: 10px;
 }
 
 .todo-container {
@@ -158,9 +173,14 @@ body {
   outline: 1px solid gray;
 }
 
-.todo-container> h2 {
+.todo-container > h2 {
   border-bottom: 1px solid gray;
   margin-bottom: 6px;
+  color: rgb(49, 187, 233);
+}
+
+.info-div > p {
+  font-weight: 300;
 }
 
 .todo > .checkbox {
@@ -171,6 +191,18 @@ body {
 .todo > .button-div {
   margin-left: auto;
   place-content: center;
+  display: flex;
+  gap: 10px;
+}
+
+.button-div > button {
+  background: none;
+  border: none;
+  font-weight: bold;
+}
+
+.button-div > button + button {
+  width: 30px;
 }
 
 .detail-container {
@@ -190,4 +222,19 @@ body {
 
 .detail-container > h2 {
   border-bottom: 1px solid gray;
+  color: rgb(49, 187, 233);
 }
+
+.detail-container > div > button {
+  background-color: rgb(239, 56, 56);
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  height: 35px;
+}
+
+p > strong {
+  color: rgb(236, 38, 38);
+}
+
