@@ -6,6 +6,82 @@
     <title>Document</title>
 </head>
 <body>
+    <dialog class="project-dialog">
+        <form>
+            <button class="cancel-button" formmethod="dialog">X</button>
+            <header class="form-header">Add New Project</header>
+            <div>
+                <label for="project-name">Project Name:</label>
+                <input type="text" id="project-name">
+            </div>
+            <button class="save-button" type="button">save</button>
+        </form>
+    </dialog>
+
+     <dialog class="todo-dialog">
+        <form>
+            <button class="cancel-button" formmethod="dialog">X</button>
+            <header class="form-header">Add New Todo</header>
+            <div>
+                <label for="title">Title</label>
+                <input type="text" id="title">
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea name="description" id="description"></textarea>
+            </div>
+                <div>
+                <label for="dueDate">Due Date:</label>
+                <input type="date" id="dueDate">
+            </div>
+            <div>
+                <label for="priority">Priority</label>
+                <select id="priority">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <div>
+                <label for="notes">Notes:</label>
+                <textarea name="notes" id="notes"></textarea>
+            </div>
+            <button class="save-button" type="button">save</button>
+        </form>
+    </dialog>
+   
+    <dialog class="edit-dialog">
+        <form>
+            <button class="cancel-button" formmethod="dialog">X</button>
+            <header class="form-header">Edit Todo</header>
+            <div>
+                <label for="title">Title</label>
+                <input type="text" id="title">
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea name="description" id="description"></textarea>
+            </div>
+                <div>
+                <label for="dueDate">Due Date:</label>
+                <input type="date" id="dueDate">
+            </div>
+            <div>
+                <label for="priority">Priority</label>
+                <select id="priority">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <div>
+                <label for="notes">Notes:</label>
+                <textarea name="notes" id="notes"></textarea>
+            </div>
+            <button class="save-button" type="button">save</button>
+        </form>
+    </dialog>
+
     <div class="left-column">
         <h2>Projects</h2>
         <div class="project-container">
