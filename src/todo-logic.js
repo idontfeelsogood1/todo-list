@@ -1,6 +1,10 @@
-export function createDefaultProject(Project) {
+import * as dom from './todo-dom';
+
+export function createDefaultProject(Project, projectArray) {
     let project1 = new Project('Default Project 1');
-    projectArray.arr = [project1];
+    projectArray.arr.push(project1);
+    dom.createDomProject(project1, projectArray);
+    project1.selected = true;
 }
 
 export function createNewProject(Project, name) {
@@ -11,8 +15,8 @@ export function addNewProjectToArray(project, projectArray) {
     projectArray.arr.push(project);
 }
 
-export function createNewTodo(Todo, title, description, dueDate, priority, notes, checkmark, status) {
-    return new Todo(title, description, dueDate, priority, notes, checkmark, status);
+export function createNewTodo(Todo, title, description, dueDate, priority, notes, status) {
+    return new Todo(title, description, dueDate, priority, notes, status);
 }
 
 export function addNewTodoToProject(projectName, projectArray, todo) {
@@ -25,14 +29,6 @@ export function addNewTodoToProject(projectName, projectArray, todo) {
 
 export function changeTodoPriority(todo, priority) {
     todo.priority = priority;
-}
-
-export function changeTodoCheckMark(todo, checkmark) {
-    todo.checkmark = checkmark;
-}
-
-export function setTodoDefaultStatus(todo) {
-    todo.status = 'Incomplete';
 }
 
 export function changeTodoStatus(todo, status) {

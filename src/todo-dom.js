@@ -2,7 +2,7 @@ import * as logic from "./todo-logic";
 
 export function createDomProject(project, projectArray) {
     let projectContainer = document.querySelector('.project-container');
-    
+    let detailContainer = document.querySelector('.detail-container > div');
     let projectDiv = document.createElement('div');
     let projectName = document.createElement('p');
     let removeBtn = document.createElement('button');
@@ -12,12 +12,29 @@ export function createDomProject(project, projectArray) {
 
     // set class for styling
     projectDiv.className = 'project';
-
+    
     // event listeners for each unique project
     removeBtn.addEventListener('click', () => {
         logic.deleteProject(project, projectArray);
         projectDiv.remove();
     }); 
+    projectDiv.addEventListener('click', () => {
+        // set selected project to true
+        for (let item of projectArray.arr) {
+            if (item.name === projectName.textContent) {
+                item.selected = true;
+            } else {
+                item.selected = false;
+            }
+        }
+        // clear previous info and add current project's infos
+        let todoList = document.querySelectorAll('.todo');
+        for (let todo of todoList) {
+            todo.remove()
+        }
+        detailContainer.innerHTML = '';
+        displayAllTodoOfProject(project);
+    })
 
     projectDiv.appendChild(projectName);
     projectDiv.appendChild(removeBtn);
@@ -55,10 +72,8 @@ export function createDomTodo(todo, project) {
     checkbox.addEventListener('change', function() {
         if (this.checked) {
             todo.status = 'Completed';
-            todo.checkmark = 'checked';
         } else {
             todo.status = 'Incomplete';
-            todo.checkmark = 'unchecked';
         }
     })
     
@@ -71,6 +86,8 @@ export function createDomTodo(todo, project) {
     removeBtn.addEventListener('click', () => {
         logic.deleteTodoFromProject(todo, project);
         todoDiv.remove();
+        document.querySelector('.detail-container > div')
+        .innerHTML = '';
     })
 
     infoDiv.appendChild(title);
@@ -105,6 +122,7 @@ export function createDomTodoDetails(todo) {
 
     // event listener for each unique todo's details
     editBtn.addEventListener('click', () => {
+        renderDefaultEditValues(todo);
         renderEditTodoDialog();
     })    
 
@@ -114,6 +132,7 @@ export function createDomTodoDetails(todo) {
     detailDiv.appendChild(priority);
     detailDiv.appendChild(notes);
     detailDiv.appendChild(status);
+    detailDiv.appendChild(editBtn);
 }
 
 export function renderAddProjectDialog() {
@@ -193,3 +212,8 @@ export function saveEdit(todo) {
     todo.notes = notes.value;
 }
 
+export function displayAllTodoOfProject(project) {
+    for (let todo of project.todoList) {
+        createDomTodo(todo, project);
+    }
+}
