@@ -10,6 +10,9 @@ function createDomProject(project, projectArray) {
     projectName = project.name;
     removeBtn.textContent = 'x';
 
+    // set class for styling
+    projectDiv.classList('project');
+
     // event listeners for each unique project
     removeBtn.addEventListener('click', () => {
         deleteProject(project, projectArray);
@@ -41,6 +44,12 @@ function createDomTodo(todo, project) {
 
     detailBtn.textContent = 'Details';
     removeBtn.textContent = 'x';
+
+    // set class for styling
+    todoDiv.classList('todo');
+    checkbox.classList('checkbox');
+    infoDiv.classList('info-div');
+    buttonDiv.classList('button-div');
 
     // event listeners for each unique todos
     checkbox.addEventListener('change', function() {
@@ -124,25 +133,20 @@ function closeAddProjectDialog() {
 
 function renderAddTodoDialog() {
     let todoDiag = document.querySelector('.todo-dialog');
-    let h2 = document.querySelector('.todo-dialog > h2');
-    h2.textContent = 'Add new Todo';
     todoDiag.showModal();
 }
 
 function renderEditTodoDialog() {
-    let todoDiag = document.querySelector('.todo-dialog');
-    let h2 = document.querySelector('.todo-dialog > h2');
-    
-    h2.textContent = 'Edit Todo';
+    let todoDiag = document.querySelector('.edit-dialog');
     todoDiag.showModal();
 }
 
 function renderDefaultEditValues(todo) {
-    let title = document.querySelector('.diag-title');
-    let description = document.querySelector('.diag-description');
-    let dueDate = document.querySelector('.diag-due-date');
-    let priority = document.querySelector('.diag-priority');
-    let notes = document.querySelector('.diag-notes');
+    let title = document.querySelector('.edit-title');
+    let description = document.querySelector('.edit-description');
+    let dueDate = document.querySelector('.edit-due-date');
+    let priority = document.querySelector('.edit-priority');
+    let notes = document.querySelector('.edit-notes');
 
     title.value = todo.title;
     description.value = todo.description;
@@ -156,12 +160,17 @@ function closeTodoDialog() {
     todoDiag.close();
 }
 
+function closeEditDialog() {
+    let todoDiag = document.querySelector('.edit-dialog');
+    todoDiag.close();
+}
+
 function saveTodo(todo) {
-    let title = document.querySelector('.diag-title');
-    let description = document.querySelector('.diag-description');
-    let dueDate = document.querySelector('.diag-due-date');
-    let priority = document.querySelector('.diag-priority');
-    let notes = document.querySelector('.diag-notes');
+    let title = document.querySelector('.todo-title');
+    let description = document.querySelector('.todo-description');
+    let dueDate = document.querySelector('.todo-due-date');
+    let priority = document.querySelector('.todo-priority');
+    let notes = document.querySelector('.todo-notes');
 
     todo.title = title.value;
     todo.description = description.value;
@@ -170,4 +179,17 @@ function saveTodo(todo) {
     todo.notes = notes.value;
 }
 
+function saveEdit(todo) {
+    let title = document.querySelector('.edit-title');
+    let description = document.querySelector('.edit-description');
+    let dueDate = document.querySelector('.edit-due-date');
+    let priority = document.querySelector('.edit-priority');
+    let notes = document.querySelector('.edit-notes');
+
+    todo.title = title.value;
+    todo.description = description.value;
+    todo.dueDate = dueDate.value;
+    todo.priority = priority.value;
+    todo.notes = notes.value;
+}
 export * from './todo-dom';

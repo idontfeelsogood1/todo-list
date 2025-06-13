@@ -12,7 +12,7 @@
             <header class="form-header">Add New Project</header>
             <div>
                 <label for="project-name">Project Name:</label>
-                <input type="text" id="project-name">
+                <input type="text" id="project-name" class="project-name">
             </div>
             <button class="save-button" type="button">save</button>
         </form>
@@ -24,19 +24,19 @@
             <header class="form-header">Add New Todo</header>
             <div>
                 <label for="title">Title</label>
-                <input type="text" id="title">
+                <input type="text" id="title" class="todo-title">
             </div>
             <div>
                 <label for="description">Description:</label>
-                <textarea name="description" id="description"></textarea>
+                <textarea name="description" id="description" class="todo-description"></textarea>
             </div>
-                <div>
+            <div>
                 <label for="dueDate">Due Date:</label>
-                <input type="date" id="dueDate">
+                <input type="date" id="dueDate" class="todo-due-date">
             </div>
             <div>
                 <label for="priority">Priority</label>
-                <select id="priority">
+                <select id="priority" class="todo-priority">
                     <option value="high">High</option>
                     <option value="medium">Medium</option>
                     <option value="low">Low</option>
@@ -44,9 +44,9 @@
             </div>
             <div>
                 <label for="notes">Notes:</label>
-                <textarea name="notes" id="notes"></textarea>
+                <textarea name="notes" id="notes" class="todo-notes"></textarea>
             </div>
-            <button class="save-button" type="button">save</button>
+            <button class="save-button" type="button" id="save-todo">save</button>
         </form>
     </dialog>
    
@@ -56,19 +56,19 @@
             <header class="form-header">Edit Todo</header>
             <div>
                 <label for="title">Title</label>
-                <input type="text" id="title">
+                <input type="text" id="title" class="edit-title">
             </div>
             <div>
                 <label for="description">Description:</label>
-                <textarea name="description" id="description"></textarea>
+                <textarea name="description" id="description" class="edit-description"></textarea>
             </div>
                 <div>
                 <label for="dueDate">Due Date:</label>
-                <input type="date" id="dueDate">
+                <input type="date" id="dueDate" class="edit-due-date">
             </div>
             <div>
                 <label for="priority">Priority</label>
-                <select id="priority">
+                <select id="priority" class="edit-priority">
                     <option value="high">High</option>
                     <option value="medium">Medium</option>
                     <option value="low">Low</option>
@@ -76,9 +76,9 @@
             </div>
             <div>
                 <label for="notes">Notes:</label>
-                <textarea name="notes" id="notes"></textarea>
+                <textarea name="notes" id="notes" class="edit-notes"></textarea>
             </div>
-            <button class="save-button" type="button">save</button>
+            <button class="save-button" type="button" id="save-edit">save</button>
         </form>
     </dialog>
 
@@ -135,7 +135,7 @@
                 <p><strong>Priority</strong>: medium</p>
                 <p><strong>Notes</strong>: just a test</p>
                 <p><strong>Status</strong>: Incomplete</p>
-                <button>Edit ToDo</button>
+                <button>Edit Todo</button>
             </div>
         </div>
     </div>
