@@ -1,6 +1,6 @@
 import "./styles.css";
-import "./todo-logic";
-import "./todo-dom";
+import * as logic from "./todo-logic";
+import * as dom from "./todo-dom";
 
 const projectArray = {
     arr: [],
@@ -26,4 +26,23 @@ class Todo {
 }
 
 
+function addProjectButton() {
+    document.querySelector('.add-project')
+    .addEventListener('click', () => {
+        dom.renderAddProjectDialog();
+    });
+}
 
+function saveProjectButton() {
+    document.querySelector('#save-project')
+    .addEventListener('click', () => {
+        let project = logic.createNewProject(Project, logic.getProjectName());
+        logic.addNewProjectToArray(project, projectArray);
+        dom.createDomProject(project, projectArray);
+        dom.closeAddProjectDialog();
+    });
+    
+}
+
+addProjectButton();
+saveProjectButton();

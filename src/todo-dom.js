@@ -1,21 +1,21 @@
-import "./todo-logic";
+import * as logic from "./todo-logic";
 
-function createDomProject(project, projectArray) {
+export function createDomProject(project, projectArray) {
     let projectContainer = document.querySelector('.project-container');
     
     let projectDiv = document.createElement('div');
     let projectName = document.createElement('p');
     let removeBtn = document.createElement('button');
 
-    projectName = project.name;
+    projectName.textContent = project.name;
     removeBtn.textContent = 'x';
 
     // set class for styling
-    projectDiv.classList('project');
+    projectDiv.className = 'project';
 
     // event listeners for each unique project
     removeBtn.addEventListener('click', () => {
-        deleteProject(project, projectArray);
+        logic.deleteProject(project, projectArray);
         projectDiv.remove();
     }); 
 
@@ -25,7 +25,7 @@ function createDomProject(project, projectArray) {
     projectContainer.appendChild(projectDiv); 
 }
 
-function createDomTodo(todo, project) {
+export function createDomTodo(todo, project) {
     let todoContainer = document.querySelector('.todo-container');
     
     let todoDiv = document.createElement('div');
@@ -46,10 +46,10 @@ function createDomTodo(todo, project) {
     removeBtn.textContent = 'x';
 
     // set class for styling
-    todoDiv.classList('todo');
-    checkbox.classList('checkbox');
-    infoDiv.classList('info-div');
-    buttonDiv.classList('button-div');
+    todoDiv.className = 'todo';
+    checkbox.className = 'checkbox';
+    infoDiv.className = 'info-div';
+    buttonDiv.className = 'button-div';
 
     // event listeners for each unique todos
     checkbox.addEventListener('change', function() {
@@ -63,13 +63,13 @@ function createDomTodo(todo, project) {
     })
     
     detailBtn.addEventListener('click', () => {
-        document.querySelector('.detail-container')
+        document.querySelector('.detail-container > div')
         .innerHTML = '';
         createDomTodoDetails(todo);
     })
 
     removeBtn.addEventListener('click', () => {
-        deleteTodoFromProject(todo, project);
+        logic.deleteTodoFromProject(todo, project);
         todoDiv.remove();
     })
 
@@ -84,9 +84,9 @@ function createDomTodo(todo, project) {
     todoContainer.appendChild(todoDiv);
 }
 
-function createDomTodoDetails(todo) {
-    let detailContainer = document.querySelector('.detail-container');
-    
+export function createDomTodoDetails(todo) {
+    let detailDiv = document.querySelector('.detail-container > div');
+
     let title = document.createElement('h4');
     let description = document.createElement('p');
     let dueDate = document.createElement('p');
@@ -108,40 +108,40 @@ function createDomTodoDetails(todo) {
         renderEditTodoDialog();
     })    
 
-    detailContainer.appendChild(title);
-    detailContainer.appendChild(description);
-    detailContainer.appendChild(dueDate);
-    detailContainer.appendChild(priority);
-    detailContainer.appendChild(notes);
-    detailContainer.appendChild(status);
+    detailDiv.appendChild(title);
+    detailDiv.appendChild(description);
+    detailDiv.appendChild(dueDate);
+    detailDiv.appendChild(priority);
+    detailDiv.appendChild(notes);
+    detailDiv.appendChild(status);
 }
 
-function renderAddProjectDialog() {
+export function renderAddProjectDialog() {
     let projectDiag = document.querySelector('.project-dialog');
     projectDiag.showModal();
 }
 
-function saveProject(project) {
+export function saveProject(project) {
     let projectName = document.querySelector('.project-name');
     project.name = projectName.value;
 }
 
-function closeAddProjectDialog() {
+export function closeAddProjectDialog() {
     let projectDiag = document.querySelector('.project-dialog');
     projectDiag.close();
 }
 
-function renderAddTodoDialog() {
+export function renderAddTodoDialog() {
     let todoDiag = document.querySelector('.todo-dialog');
     todoDiag.showModal();
 }
 
-function renderEditTodoDialog() {
+export function renderEditTodoDialog() {
     let todoDiag = document.querySelector('.edit-dialog');
     todoDiag.showModal();
 }
 
-function renderDefaultEditValues(todo) {
+export function renderDefaultEditValues(todo) {
     let title = document.querySelector('.edit-title');
     let description = document.querySelector('.edit-description');
     let dueDate = document.querySelector('.edit-due-date');
@@ -155,17 +155,17 @@ function renderDefaultEditValues(todo) {
     notes.value = todo.notes;
 }
 
-function closeTodoDialog() {
+export function closeTodoDialog() {
     let todoDiag = document.querySelector('.todo-dialog');
     todoDiag.close();
 }
 
-function closeEditDialog() {
+export function closeEditDialog() {
     let todoDiag = document.querySelector('.edit-dialog');
     todoDiag.close();
 }
 
-function saveTodo(todo) {
+export function saveTodo(todo) {
     let title = document.querySelector('.todo-title');
     let description = document.querySelector('.todo-description');
     let dueDate = document.querySelector('.todo-due-date');
@@ -179,7 +179,7 @@ function saveTodo(todo) {
     todo.notes = notes.value;
 }
 
-function saveEdit(todo) {
+export function saveEdit(todo) {
     let title = document.querySelector('.edit-title');
     let description = document.querySelector('.edit-description');
     let dueDate = document.querySelector('.edit-due-date');
@@ -192,4 +192,4 @@ function saveEdit(todo) {
     todo.priority = priority.value;
     todo.notes = notes.value;
 }
-export * from './todo-dom';
+
