@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* 1. Use a more-intuitive box-sizing model */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -6,6 +8,7 @@
 /* 2. Remove default margin */
 * {
   margin: 0;
+  font-family: 'Roboto';
 }
 
 /* 3. Enable keyword animations */
@@ -77,6 +80,7 @@ body {
 .left-column > h2 {
   margin-bottom: 10px;
   text-align: center;
+  color: rgb(221, 217, 217);
 }
 
 .left-column > button {
@@ -91,12 +95,39 @@ body {
   gap: 20px
 }
 
+.project-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .project-container > div {
   display: flex;
   padding: 10px;
   justify-content: space-between;
   align-items: center;
   text-align: center;
+  background-color: rgb(60, 60, 53);
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.project > button {
+  color: white;
+  background: rgb(208, 41, 41);
+  width: 35px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.add-project {
+  background-color: lightblue;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  height: 55px;
 }
 
 .header {
