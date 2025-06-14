@@ -1,20 +1,40 @@
-import "./todo-logic";
+import * as logic from "./todo-logic";
 
-function createDomProject(project, projectArray) {
+export function createDomProject(project, projectArray) {
     let projectContainer = document.querySelector('.project-container');
-    
+    let detailContainer = document.querySelector('.detail-container > div');
     let projectDiv = document.createElement('div');
     let projectName = document.createElement('p');
     let removeBtn = document.createElement('button');
 
-    projectName = project.name;
+    projectName.textContent = project.name;
     removeBtn.textContent = 'x';
 
+    // set class for styling
+    projectDiv.className = 'project';
+    
     // event listeners for each unique project
     removeBtn.addEventListener('click', () => {
-        deleteProject(project, projectArray);
+        logic.deleteProject(project, projectArray);
         projectDiv.remove();
     }); 
+    projectDiv.addEventListener('click', () => {
+        // set selected project to true
+        for (let item of projectArray.arr) {
+            if (item.name === projectName.textContent) {
+                item.selected = true;
+            } else {
+                item.selected = false;
+            }
+        }
+        // clear previous info and add current project's infos
+        let todoList = document.querySelectorAll('.todo');
+        for (let todo of todoList) {
+            todo.remove()
+        }
+        detailContainer.innerHTML = '';
+        displayAllTodoOfProject(project);
+    })
 
     projectDiv.appendChild(projectName);
     projectDiv.appendChild(removeBtn);
@@ -22,7 +42,7 @@ function createDomProject(project, projectArray) {
     projectContainer.appendChild(projectDiv); 
 }
 
-function createDomTodo(todo, project) {
+export function createDomTodo(todo, project) {
     let todoContainer = document.querySelector('.todo-container');
     
     let todoDiv = document.createElement('div');
@@ -42,26 +62,32 @@ function createDomTodo(todo, project) {
     detailBtn.textContent = 'Details';
     removeBtn.textContent = 'x';
 
+    // set class for styling
+    todoDiv.className = 'todo';
+    checkbox.className = 'checkbox';
+    infoDiv.className = 'info-div';
+    buttonDiv.className = 'button-div';
+
     // event listeners for each unique todos
     checkbox.addEventListener('change', function() {
         if (this.checked) {
             todo.status = 'Completed';
-            todo.checkmark = 'checked';
         } else {
             todo.status = 'Incomplete';
-            todo.checkmark = 'unchecked';
         }
     })
     
     detailBtn.addEventListener('click', () => {
-        document.querySelector('.detail-container')
+        document.querySelector('.detail-container > div')
         .innerHTML = '';
         createDomTodoDetails(todo);
     })
 
     removeBtn.addEventListener('click', () => {
-        deleteTodoFromProject(todo, project);
+        logic.deleteTodoFromProject(todo, project);
         todoDiv.remove();
+        document.querySelector('.detail-container > div')
+        .innerHTML = '';
     })
 
     infoDiv.appendChild(title);
@@ -75,9 +101,9 @@ function createDomTodo(todo, project) {
     todoContainer.appendChild(todoDiv);
 }
 
-function createDomTodoDetails(todo) {
-    let detailContainer = document.querySelector('.detail-container');
-    
+export function createDomTodoDetails(todo) {
+    let detailDiv = document.querySelector('.detail-container > div');
+
     let title = document.createElement('h4');
     let description = document.createElement('p');
     let dueDate = document.createElement('p');
@@ -96,53 +122,50 @@ function createDomTodoDetails(todo) {
 
     // event listener for each unique todo's details
     editBtn.addEventListener('click', () => {
+        renderDefaultEditValues(todo);
         renderEditTodoDialog();
     })    
 
-    detailContainer.appendChild(title);
-    detailContainer.appendChild(description);
-    detailContainer.appendChild(dueDate);
-    detailContainer.appendChild(priority);
-    detailContainer.appendChild(notes);
-    detailContainer.appendChild(status);
+    detailDiv.appendChild(title);
+    detailDiv.appendChild(description);
+    detailDiv.appendChild(dueDate);
+    detailDiv.appendChild(priority);
+    detailDiv.appendChild(notes);
+    detailDiv.appendChild(status);
+    detailDiv.appendChild(editBtn);
 }
 
-function renderAddProjectDialog() {
+export function renderAddProjectDialog() {
     let projectDiag = document.querySelector('.project-dialog');
     projectDiag.showModal();
 }
 
-function saveProject(project) {
+export function saveProject(project) {
     let projectName = document.querySelector('.project-name');
     project.name = projectName.value;
 }
 
-function closeAddProjectDialog() {
+export function closeAddProjectDialog() {
     let projectDiag = document.querySelector('.project-dialog');
     projectDiag.close();
 }
 
-function renderAddTodoDialog() {
+export function renderAddTodoDialog() {
     let todoDiag = document.querySelector('.todo-dialog');
-    let h2 = document.querySelector('.todo-dialog > h2');
-    h2.textContent = 'Add new Todo';
     todoDiag.showModal();
 }
 
-function renderEditTodoDialog() {
-    let todoDiag = document.querySelector('.todo-dialog');
-    let h2 = document.querySelector('.todo-dialog > h2');
-    
-    h2.textContent = 'Edit Todo';
+export function renderEditTodoDialog() {
+    let todoDiag = document.querySelector('.edit-dialog');
     todoDiag.showModal();
 }
 
-function renderDefaultEditValues(todo) {
-    let title = document.querySelector('.diag-title');
-    let description = document.querySelector('.diag-description');
-    let dueDate = document.querySelector('.diag-due-date');
-    let priority = document.querySelector('.diag-priority');
-    let notes = document.querySelector('.diag-notes');
+export function renderDefaultEditValues(todo) {
+    let title = document.querySelector('.edit-title');
+    let description = document.querySelector('.edit-description');
+    let dueDate = document.querySelector('.edit-due-date');
+    let priority = document.querySelector('.edit-priority');
+    let notes = document.querySelector('.edit-notes');
 
     title.value = todo.title;
     description.value = todo.description;
@@ -151,17 +174,22 @@ function renderDefaultEditValues(todo) {
     notes.value = todo.notes;
 }
 
-function closeTodoDialog() {
+export function closeTodoDialog() {
     let todoDiag = document.querySelector('.todo-dialog');
     todoDiag.close();
 }
 
-function saveTodo(todo) {
-    let title = document.querySelector('.diag-title');
-    let description = document.querySelector('.diag-description');
-    let dueDate = document.querySelector('.diag-due-date');
-    let priority = document.querySelector('.diag-priority');
-    let notes = document.querySelector('.diag-notes');
+export function closeEditDialog() {
+    let todoDiag = document.querySelector('.edit-dialog');
+    todoDiag.close();
+}
+
+export function saveTodo(todo) {
+    let title = document.querySelector('.todo-title');
+    let description = document.querySelector('.todo-description');
+    let dueDate = document.querySelector('.todo-due-date');
+    let priority = document.querySelector('.todo-priority');
+    let notes = document.querySelector('.todo-notes');
 
     todo.title = title.value;
     todo.description = description.value;
@@ -170,4 +198,22 @@ function saveTodo(todo) {
     todo.notes = notes.value;
 }
 
-export * from './todo-dom';
+export function saveEdit(todo) {
+    let title = document.querySelector('.edit-title');
+    let description = document.querySelector('.edit-description');
+    let dueDate = document.querySelector('.edit-due-date');
+    let priority = document.querySelector('.edit-priority');
+    let notes = document.querySelector('.edit-notes');
+
+    todo.title = title.value;
+    todo.description = description.value;
+    todo.dueDate = dueDate.value;
+    todo.priority = priority.value;
+    todo.notes = notes.value;
+}
+
+export function displayAllTodoOfProject(project) {
+    for (let todo of project.todoList) {
+        createDomTodo(todo, project);
+    }
+}

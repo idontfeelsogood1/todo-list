@@ -1,21 +1,25 @@
-function createDefaultProject(Project) {
+import * as dom from './todo-dom';
+
+export function createDefaultProject(Project, projectArray) {
     let project1 = new Project('Default Project 1');
-    projectArray.arr = [project1];
+    projectArray.arr.push(project1);
+    dom.createDomProject(project1, projectArray);
+    project1.selected = true;
 }
 
-function createNewProject(Project, name) {
+export function createNewProject(Project, name) {
     return new Project(name);
 }
 
-function addNewProjectToArray(project, projectArray) {
+export function addNewProjectToArray(project, projectArray) {
     projectArray.arr.push(project);
 }
 
-function createNewTodo(Todo, title, description, dueDate, priority, notes, checkmark, status) {
-    return new Todo(title, description, dueDate, priority, notes, checkmark, status);
+export function createNewTodo(Todo, title, description, dueDate, priority, notes, status) {
+    return new Todo(title, description, dueDate, priority, notes, status);
 }
 
-function addNewTodoToProject(projectName, projectArray, todo) {
+export function addNewTodoToProject(projectName, projectArray, todo) {
     for (let project of projectArray) {
         if (project.name === projectName) {
             project.todoList.push(todo);
@@ -23,19 +27,11 @@ function addNewTodoToProject(projectName, projectArray, todo) {
     }
 }
 
-function changeTodoPriority(todo, priority) {
+export function changeTodoPriority(todo, priority) {
     todo.priority = priority;
 }
 
-function changeTodoCheckMark(todo, checkmark) {
-    todo.checkmark = checkmark;
-}
-
-function setTodoDefaultStatus(todo) {
-    todo.status = 'Incomplete';
-}
-
-function changeTodoStatus(todo, status) {
+export function changeTodoStatus(todo, status) {
     if (todo.status === 'Incomplete') {
         todo.status = 'Completed';
     } else {
@@ -43,17 +39,17 @@ function changeTodoStatus(todo, status) {
     }
 }
 
-function deleteProject(project, projectArray) {
+export function deleteProject(project, projectArray) {
     projectArray.arr.splice(projectArray.arr.indexOf(project), 1);
 }
 
-function deleteTodoFromProject(todo, project) {
+export function deleteTodoFromProject(todo, project) {
     if (project.todoList.includes(todo)) {
         project.todoList.splice(project.todoList.indexOf(todo), 1);
     }
 }
 
-function editTodo(todo, title, description, dueDate, priority, notes) {
+export function editTodo(todo, title, description, dueDate, priority, notes) {
     todo.title = title;
     todo.description = description;
     todo.dueDate = dueDate;
@@ -61,5 +57,6 @@ function editTodo(todo, title, description, dueDate, priority, notes) {
     todo.notes = notes;
 } 
 
-
-export * from "./todo-logic";
+export function getProjectName() {
+    return document.querySelector('.project-name').value;
+}

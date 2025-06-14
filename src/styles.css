@@ -238,3 +238,78 @@ p > strong {
   color: rgb(236, 38, 38);
 }
 
+.project-dialog > form {
+  width: 500px;
+  height: 200px;
+}
+
+dialog {
+  justify-self: center;
+  align-self: center;
+  border-radius: 8px;
+  border: 3px solid black;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.form-header {  
+  text-align: center;
+  color: rgb(49, 187, 233);
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.cancel-button {
+  margin-left: auto;
+  background: none;
+  font-weight: bold;
+  border: none;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+}
+
+div > label {
+  font-weight: bold;
+}
+
+div > input {
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.save-button {
+  background-color: rgb(239, 56, 56);
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  height: 35px;
+}
+
+.todo-dialog, .edit-dialog {
+  height: 700px;
+  width: 500px;
+}
+
+.todo-dialog > form, .edit-dialog > form {
+  gap: 32px;
+}
+
+select {
+  border-radius: 8px;
+  height: 30px;
+  background: none;
+}
+
+textarea {
+  border-radius: 8px;
+}
+
+
