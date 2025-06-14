@@ -132,6 +132,7 @@ export function createDomTodoDetails(todo, project) {
 
     // set clas for styling
     status.className = 'status';
+    title.className = 'title';
 
     // event listener for each unique todo's details
     editBtn.addEventListener('click', () => {
