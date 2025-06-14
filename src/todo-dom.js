@@ -14,10 +14,18 @@ export function createDomProject(project, projectArray) {
     projectDiv.className = 'project';
     
     // event listeners for each unique project
-    removeBtn.addEventListener('click', () => {
+    removeBtn.addEventListener('click', (event) => {
         logic.deleteProject(project, projectArray);
         projectDiv.remove();
-    }); 
+
+        // clear all project todos
+        let todoList = document.querySelectorAll('.todo');
+        for (let todo of todoList) {
+            todo.remove();
+            detailContainer.innerHTML = '';
+            event.stopPropagation();
+        }
+    });
     projectDiv.addEventListener('click', () => {
         // set selected project to true
         for (let item of projectArray.arr) {
@@ -30,7 +38,7 @@ export function createDomProject(project, projectArray) {
         // clear previous info and add current project's infos
         let todoList = document.querySelectorAll('.todo');
         for (let todo of todoList) {
-            todo.remove()
+            todo.remove();
         }
         detailContainer.innerHTML = '';
         displayAllTodoOfProject(project);
@@ -72,15 +80,17 @@ export function createDomTodo(todo, project) {
     checkbox.addEventListener('change', function() {
         if (this.checked) {
             todo.status = 'Completed';
+            changeDomTodoStatus(todo);
         } else {
             todo.status = 'Incomplete';
+            changeDomTodoStatus(todo);
         }
     })
     
     detailBtn.addEventListener('click', () => {
         document.querySelector('.detail-container > div')
         .innerHTML = '';
-        createDomTodoDetails(todo);
+        createDomTodoDetails(todo, project);
     })
 
     removeBtn.addEventListener('click', () => {
@@ -101,7 +111,7 @@ export function createDomTodo(todo, project) {
     todoContainer.appendChild(todoDiv);
 }
 
-export function createDomTodoDetails(todo) {
+export function createDomTodoDetails(todo, project) {
     let detailDiv = document.querySelector('.detail-container > div');
 
     let title = document.createElement('h4');
@@ -115,15 +125,25 @@ export function createDomTodoDetails(todo) {
     title.textContent = todo.title;
     description.innerHTML = `<strong>Description</strong>: ${todo.description}`;
     dueDate.innerHTML = `<strong>Due Date</strong>: ${todo.dueDate}`;
-    priority.innerHTML = `<strong>Priority</strong>: ${todo.priority}`;
+    priority.innerHTML = `<strong>Priority</strong>: <span>${todo.priority}</span>`;
     notes.innerHTML = `<strong>Notes</strong>: ${todo.notes}`;
-    status.innerHTML = `<strong>Status</strong>: ${todo.status}`;
+    status.innerHTML = `<strong>Status</strong>: <a>${todo.status}</a>`;
     editBtn.textContent = 'Edit Todo';
+
+    // set clas for styling
+    status.className = 'status';
 
     // event listener for each unique todo's details
     editBtn.addEventListener('click', () => {
         renderDefaultEditValues(todo);
         renderEditTodoDialog();
+        for (let item of project.todoList) {
+            if (item.title === todo.title) {
+                item.detailClicked = true;
+            } else {
+                item.detailClicked = false;
+            }
+        }
     })    
 
     detailDiv.appendChild(title);
@@ -133,6 +153,24 @@ export function createDomTodoDetails(todo) {
     detailDiv.appendChild(notes);
     detailDiv.appendChild(status);
     detailDiv.appendChild(editBtn);
+
+    // condition to change color 
+
+    let span = document.querySelector('span');
+    if (todo.priority === 'High') {
+        span.style.color = 'red';
+    } else if (todo.priority === 'Medium') {
+        span.style.color = 'yellow';
+    } else if (todo.priority === 'Low') {
+        span.style.color = 'green';
+    }
+
+    let a = document.querySelector('a');
+    if (todo.status === 'Incomplete') {
+        a.style.color = 'red';
+    } else if (todo.status === 'Completed') {
+        a.style.color = 'green';
+    } 
 }
 
 export function renderAddProjectDialog() {
@@ -216,4 +254,39 @@ export function displayAllTodoOfProject(project) {
     for (let todo of project.todoList) {
         createDomTodo(todo, project);
     }
+}
+
+export function saveEditForRightTodo(projectArray) {
+    document.querySelector('#save-edit')
+    .addEventListener('click', () => {
+        for (let project of projectArray.arr) {
+            for (let todo of project.todoList) {
+                if (todo.detailClicked === true) {
+                    saveEdit(todo);
+                    closeEditDialog();
+
+                    let todos = document.querySelectorAll('.todo');
+                    for (let item of todos) {
+                        item.remove();
+                    }
+                    let detailDiv = document.querySelector('.detail-container > div');
+                    detailDiv.innerHTML = '';
+
+                    displayAllTodoOfProject(project);
+                    createDomTodoDetails(todo, project);
+                }
+            }
+        }
+    });
+}
+
+export function changeDomTodoStatus(todo) {
+    let status = document.querySelector('.status');
+    status.innerHTML = `<strong>Status</strong>: <a>${todo.status}</a>`;
+    let a = document.querySelector('a');
+    if (todo.status === 'Incomplete') {
+        a.style.color = 'red';
+    } else if (todo.status === 'Completed') {
+        a.style.color = 'green';
+    } 
 }

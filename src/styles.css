@@ -235,7 +235,7 @@ body {
 }
 
 p > strong {
-  color: rgb(236, 38, 38);
+  color: black;
 }
 
 .project-dialog > form {
@@ -312,4 +312,6 @@ textarea {
   border-radius: 8px;
 }
 
-
+span, a {
+  font-weight: bolder;
+}

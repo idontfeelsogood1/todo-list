@@ -22,8 +22,7 @@ class Todo {
         this.priority = priority;
         this.notes = notes;
         this.status = status;
-
-        // idea: this.details-clicked = false;
+        this.detailClicked = false;
     }
 }
 
@@ -81,6 +80,7 @@ function saveNewTodoButton() {
 
 
 logic.createDefaultProject(Project, projectArray);
+dom.saveEditForRightTodo(projectArray);
 addProjectButton();
 saveProjectButton();
 addTodoButton();
