@@ -41,6 +41,7 @@ export function changeTodoStatus(todo, status) {
 
 export function deleteProject(project, projectArray) {
     projectArray.arr.splice(projectArray.arr.indexOf(project), 1);
+    saveProjectAndToDoInStorage(projectArray);
 }
 
 export function deleteTodoFromProject(todo, project) {
@@ -59,4 +60,44 @@ export function editTodo(todo, title, description, dueDate, priority, notes) {
 
 export function getProjectName() {
     return document.querySelector('.project-name').value;
+}
+
+export function saveProjectAndToDoInStorage(projectArray) {
+    localStorage.setItem("ProjectAndTodo", JSON.stringify(projectArray));
+}
+
+export function loadStorage(projectArray, Project, Todo, defaultTracker) {
+    let storageProjectArray = JSON.parse(localStorage.getItem("ProjectAndTodo"));
+    // set current array to storage array
+    projectArray.arr = storageProjectArray.arr.map(projData => {
+        const project = new Project(projData.name);
+        project.selected = projData.selected;
+
+        project.todoList = projData.todoList.map(todoData => {
+            const todo = new Todo(
+                todoData.title,
+                todoData.description,
+                todoData.dueDate,
+                todoData.priority,
+                todoData.notes,
+                todoData.status
+            );
+            todo.detailClicked = todoData.detailClicked;
+            return todo;
+        });
+
+        return project;
+    });
+
+    // generate default project for each unique user
+    if (defaultTracker.value === false && !localStorage.hasOwnProperty("added")) {
+        createDefaultProject(Project, projectArray);
+        localStorage.setItem("added", JSON.stringify(true));
+    }
+        
+    
+    // load dom content
+    for (let project of projectArray.arr) {
+        dom.createDomProject(project, projectArray);
+    }
 }

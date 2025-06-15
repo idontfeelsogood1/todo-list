@@ -2,6 +2,11 @@ import "./styles.css";
 import * as logic from "./todo-logic";
 import * as dom from "./todo-dom";
 
+// variable to check if default project has been generated for each user
+const defaultTracker = {
+    value: false,
+}
+
 const projectArray = {
     arr: [],
 }
@@ -39,6 +44,7 @@ function saveProjectButton() {
     .addEventListener('click', () => {
         let project = logic.createNewProject(Project, logic.getProjectName());
         logic.addNewProjectToArray(project, projectArray);
+        logic.saveProjectAndToDoInStorage(projectArray);
         dom.createDomProject(project, projectArray);
         dom.closeAddProjectDialog();
     });
@@ -70,6 +76,7 @@ function saveNewTodoButton() {
                     eachTodo.remove();
                 }
                 project.todoList.push(todo);    
+                logic.saveProjectAndToDoInStorage(projectArray);
                 dom.displayAllTodoOfProject(project);   
             }
         }
@@ -78,10 +85,11 @@ function saveNewTodoButton() {
     });
 }
 
-
-logic.createDefaultProject(Project, projectArray);
 dom.saveEditForRightTodo(projectArray);
 addProjectButton();
 saveProjectButton();
 addTodoButton();
 saveNewTodoButton();
+
+// this must be run last
+logic.loadStorage(projectArray, Project, Todo, defaultTracker);

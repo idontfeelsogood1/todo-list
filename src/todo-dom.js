@@ -35,6 +35,10 @@ export function createDomProject(project, projectArray) {
                 item.selected = false;
             }
         }
+
+        // change header name
+        document.querySelector('.header > h1').textContent = project.name;
+
         // clear previous info and add current project's infos
         let todoList = document.querySelectorAll('.todo');
         for (let todo of todoList) {
@@ -265,6 +269,8 @@ export function saveEditForRightTodo(projectArray) {
                 if (todo.detailClicked === true) {
                     saveEdit(todo);
                     closeEditDialog();
+                    // save edit to localStorage
+                    logic.saveProjectAndToDoInStorage(projectArray);
 
                     let todos = document.querySelectorAll('.todo');
                     for (let item of todos) {
