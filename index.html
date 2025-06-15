@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script defer src="main.js"></script></head>
+<body>
+    <dialog class="project-dialog">
+        <form>
+            <button class="cancel-button" formmethod="dialog">X</button>
+            <header class="form-header">Add New Project</header>
+            <div>
+                <label for="project-name">Project Name:</label>
+                <input type="text" id="project-name" class="project-name" value="Untitled">
+            </div>
+            <button class="save-button" type="button" id="save-project">save</button>
+        </form>
+    </dialog>
+
+     <dialog class="todo-dialog">
+        <form>
+            <button class="cancel-button" formmethod="dialog">X</button>
+            <header class="form-header">Add New Todo</header>
+            <div>
+                <label for="title">Title</label>
+                <input type="text" id="title" class="todo-title">
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea name="description" id="description" class="todo-description"></textarea>
+            </div>
+            <div>
+                <label for="dueDate">Due Date:</label>
+                <input type="date" id="dueDate" class="todo-due-date">
+            </div>
+            <div>
+                <label for="priority">Priority</label>
+                <select id="priority" class="todo-priority">
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div>
+                <label for="notes">Notes:</label>
+                <textarea name="notes" id="notes" class="todo-notes"></textarea>
+            </div>
+            <button class="save-button" type="button" id="save-todo">save</button>
+        </form>
+    </dialog>
+   
+    <dialog class="edit-dialog">
+        <form>
+            <button class="cancel-button" formmethod="dialog">X</button>
+            <header class="form-header">Edit Todo</header>
+            <div>
+                <label for="title">Title</label>
+                <input type="text" id="title" class="edit-title">
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <textarea name="description" id="description" class="edit-description"></textarea>
+            </div>
+                <div>
+                <label for="dueDate">Due Date:</label>
+                <input type="date" id="dueDate" class="edit-due-date">
+            </div>
+            <div>
+                <label for="priority">Priority</label>
+                <select id="priority" class="edit-priority">
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div>
+                <label for="notes">Notes:</label>
+                <textarea name="notes" id="notes" class="edit-notes"></textarea>
+            </div>
+            <button class="save-button" type="button" id="save-edit">save</button>
+        </form>
+    </dialog>
+
+    <div class="left-column">
+        <h2>Projects</h2>
+        <div class="project-container">
+
+        </div>
+        <button class="add-project">+ Add Project</button>
+    </div>
+    <div class="right-column">
+        <div class="header">
+            <h1></h1>
+            <button class="add-todo">+ Add Todo</button>
+        </div>
+        <div class="todo-container">
+            <h2>Todos</h2>
+
+
+        </div>
+        <div class="detail-container">
+            <h2>Todo Details</h2>
+            <div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
